@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Police Gunshot</title>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/23e84aadad.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #f8f9fa;
+        }
+
+        /* 왼쪽 부분 */
+        .select_container {
+            padding-left: 10px;
+            width: 300px;
+            position: absolute;
+        }
+
+        .select_container div {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            margin-bottom: 10px;
+        }
+
+        .button-hover {
+            position: relative;
+            height: 70px;
+            width: 170px;
+            margin-bottom: 20px;
+            padding: 0.3em;
+            border-radius: 20px;
+            background: linear-gradient(to right, #A31E22, #154A9A);
+            border: 0;
+            outline: 0;
+            cursor: pointer;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .button-hover::before,
+        .button-hover::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(to right, #A31E22, #154A9A);
+            border-radius: 20px;
+            transition: all .5s ease-in-out;
+        }
+
+        .button-hover:hover::before {
+            filter: blur(5px);
+        }
+
+        .button-hover:hover::after {
+            filter: blur(15px);
+        }
+
+        .button-hover:focus::before {
+            filter: blur(5px);
+        }
+
+        .button-hover:focus::after {
+            filter: blur(15px);
+        }
+
+
+        .button-hover span {
+            position: relative;
+            display: block;
+            z-index: 3;
+            padding: 1.3em;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            font-weight: bold;
+            background-color: #f8f9fa;
+            border-radius: 17px;
+            white-space: pre-line;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /*
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        #options_listbox {
+            background-color: #f8f9fa;
+            position: relative;
+            width: 230px;
+            height: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            text-indent: 10px;
+            outline: none;
+            color: #444;
+            transition: .5s;
+            cursor: pointer;
+            overflow-y: none;
+        }*/
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        #checkbox_container{
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #check_boxs {
+            background-color: #f8f9fa;
+            width: 230px;
+            height: 150px;
+            text-indent: 10px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-top: 10px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            padding-left: 20px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #check_boxs div {
+            width: 150px;
+            height: 20px;
+            font-size: 13px;
+            font-weight: bold;  
+                     
+        }
+        #check_boxs div input[type = "checkbox"] {
+            display: none;
+        }
+
+        #check_boxs div label {
+            cursor: pointer;
+        }
+        #check_boxs div label::before {
+            content: "";
+            background: url("check-circle.svg");
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            left: -40px;
+            top: -5px;
+            
+            transform: scale(0) rotateZ(180deg);
+            transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+        }
+        #check_boxs div input[type = "checkbox"]:checked + label::before {
+            transform: scale(1) rotateZ(0deg);
+        }
+        #check_boxs div label::after {
+            content: "";
+            border: 2px solid #27ae60;
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            left: -39px;
+            top: -4px;
+            border-radius: 50%;
+        }
+
+        #Select_namebox {
+            width: 300px;
+            position: relative;
+            padding: 0;
+            box-sizing: border-box;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-left: 20px;
+            margin-top: 50px;
+        }
+
+        #Select_namebox li {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 20px;
+            justify-content: space-between;
+        }
+
+        #Select_namebox li span:nth-child(1) {
+            font-weight: bolder;
+            margin-left: 5px;
+        }
+
+        #Select_namebox li span:nth-child(2) {
+            width: 150px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        #Select_namebox li span:nth-child(2) div {
+            width: 150px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        #Select_namebox li span:nth-child(2) div:nth-child(1) {
+            color: #143642; /*#143642;*/
+        }
+
+        #Select_namebox li span:nth-child(2) div:nth-child(2) {
+            color: #b76935;   
+        }
+
+
+        /* 중앙 부분 */
+        .sankey_container {
+            position: absolute;
+            width: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Chart_information {
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-evenly;
+        }
+
+        #Chart_information div:nth-child(1) {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            width: 600px;
+            justify-content: space-evenly;
+        }
+
+        #Chart_information div button {
+            width: 200px;
+            height: 40px;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 2px;
+            white-space: pre-line;
+            border: 0;
+            outline: 0;
+            background-color: #f8f9fa;
+            border-radius: 18px;
+            box-shadow: -7px -7px 20px 0 rgba(255, 255, 255, 1),
+                7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        #Chart_information div button:hover {
+            box-shadow: inset -7px -7px 20px 0 rgba(255, 255, 255, 1),
+                inset 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        #Chart_information div button:focus {
+            color: #0466c8;
+            box-shadow: inset -7px -7px 20px 0 rgba(255, 255, 255, 1),
+                inset 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        #sankey_multiple {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-around;
+        }
+
+        .toolTip::-webkit-scrollbar {
+            display: none;
+        }
+
+        #toolTip {
+            position: absolute;
+            width: 150px;
+            height: 100px;
+            border: 0 none;
+            border-radius: 5px;
+            background-color:#f9f6f5;
+            padding: 5px;
+            text-align: center;
+            overflow: scroll;
+            display: flex;
+            flex-direction: column;
+            align-self: center;
+        }
+
+        #toolTip div:nth-child(1) {
+            margin-bottom: 20px;
+            color:   #f58549;
+        }
+        #toolTip div a {
+            font-weight: bold;
+            font-size: 15px;
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        #toolTip div a:link {
+            color: black;
+        }
+
+
+        /* 오른쪽 부분 */
+
+        .bar_chart {
+            position: absolute;
+            right: 0;
+            width: 300px;
+            padding-right: 3%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-around;
+        }
+
+        .bar_chart svg {
+            padding: 20px;
+            padding-bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-around;
+        }
+
+        .bar_chart svg:nth-of-type(4) {
+            padding: 0;
+            padding-right: 20px;
+        }
+    </style>
+
+    <link rel="shortcut icon" href="#">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/sankey.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://unpkg.com/d3-array@1"></script>
+    <script src="https://unpkg.com/d3-collection@1"></script>
+    <script src="https://unpkg.com/d3-path@1"></script>
+    <script src="https://unpkg.com/d3-shape@1"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
+    <script src="https://d3js.org/d3-color.v2.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v2.min.js"></script>
+
+</head>
+
+<body>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <div class="select_container">
+        <img src="usprt_title.svg">
+        <div>
+            <button class='button-hover'>
+                <span id="High Justifed">Sort City by
+                    High Justifed</span>
+            </button>
+
+            <button class='button-hover'>
+                <span id="High OverReaction">Sort City by
+                    High OverReaction</span>
+            </button>
+
+            <button class='button-hover'>
+                <span id="High Killed by Police">Sort City by
+                    High Killed by Police</span>
+            </button>
+        </div>
+        <!--
+             <div>
+                <select name="Show list" id="options_listbox" multiple
+                    ondblclick="getselectedSankey(); getselectedBar();"></select>
+
+            </div>
+        -->
+        <div id = "checkbox_container">
+            <div id = 'check_boxs'></div>
+        </div>
+
+        <div>
+            <ul id="Select_namebox"></ul>
+        </div>
+
+    </div>
+
+    <div class="sankey_container">
+        <small id="Chart_information">
+            <div>
+                <button id="focus_offical" onclick="get_legend(this.id);chartmode(this.id);"
+                    [disabled]="disabled">Official Disposition</button>
+                <button id="focus_race" onclick="get_legend(this.id);chartmode(this.id);"
+                    [disabled]="disabled">Race</button>
+            </div>
+            <div id ="Chart_Color"></div>
+            <div>
+                <b>Chart Context</b>
+                <br>
+                <i id="Chart_context">
+                    City -> Official Disposition of Death -> Armed -> Weapon -> Threat Level -> Race
+                </i>
+                <br>
+            </div>
+        </small>
+        <div id="sankey_multiple"></div>
+    </div>
+
+    <div class="bar_chart"></div>
+
+
+
+
+    <script src="Tendency.js"></script>
+    <script src="Parallel.js"></script>
+    <script src="BarChart.js"></script>
+
+</body>
+
+</html>
